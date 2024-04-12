@@ -8,7 +8,6 @@ const KIOSKID = 'PTK-001';
 
 socket.on('connect', () => {
   wifi.init();
-  console.log('connected');
   setInterval(() => {
     wifi.getCurrentConnections((error, currentConnections) => {
       socket.emit(
