@@ -10,20 +10,37 @@ socket.on('connect', () => {
   wifi.init();
   setInterval(() => {
     wifi.getCurrentConnections((error, currentConnections) => {
-      socket.emit(
-        'health',
-        JSON.stringify({
-          wifi: currentConnections[0],
-          ping: true,
-          kioskId: KIOSKID,
-          time: new Date(),
-          os: {
-            uptime: os.uptime(),
-            freeMem: os.freemem(),
-            load: os.loadavg(),
-          },
-        })
-      );
+      if (error) {
+        socket.emit(
+          'health',
+          JSON.stringify({
+            wifi: false,
+            ping: true,
+            kioskId: KIOSKID,
+            time: new Date(),
+            os: {
+              uptime: os.uptime(),
+              freeMem: os.freemem(),
+              load: os.loadavg(),
+            },
+          })
+        );
+      } else {
+        socket.emit(
+          'health',
+          JSON.stringify({
+            wifi: currentConnections[0],
+            ping: true,
+            kioskId: KIOSKID,
+            time: new Date(),
+            os: {
+              uptime: os.uptime(),
+              freeMem: os.freemem(),
+              load: os.loadavg(),
+            },
+          })
+        );
+      }
     });
   }, 20000);
 });
