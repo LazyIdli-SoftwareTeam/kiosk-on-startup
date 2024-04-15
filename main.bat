@@ -1,4 +1,4 @@
-REM  change the host_name, the kioskId as per required
+REM  change the host_name, the kioskId as per required install firefox nodejs20 git remove the main leaderboard link
 @echo off
 set KIOSKID="PTK-001"
 set HOST_NAME=lazyIdli
